@@ -9,10 +9,10 @@ jobs:
   Deploy123:
     runs-on: ubuntu-latest
     steps:
-      - name: ssh(원격접속)로 ec2에 접속하기 / appleboy라는 라이브러리를 이용해서
+      - name: ssh(원격접속)로 ec2에 접속하기
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_HOST}}
+          host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
@@ -21,5 +21,4 @@ jobs:
             git pull origin main
             ./gradlew clean build
             sudo fuser -k -n tcp 8080 || true
-#            표준출력 (왜넣냐? 이 라이브러리에 있는 이슈임 이렇게 안하면 동작을 안했대)
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
