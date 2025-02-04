@@ -8,7 +8,7 @@ public class InstagramController {
 
     @GetMapping("/")
     public String hello() {
-        return "Hello world";
+        return "whatthe Hello world";
     }
 
 }
